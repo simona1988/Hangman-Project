@@ -1,16 +1,16 @@
-const words = ["programare", "calculator", "internet", "joc", "javascript"];
+const words = ["list", "game", "strawberry", "hangman", "reality"];
 const chosenWord = words[Math.floor(Math.random() * words.length)];
 let guessedWord = Array(chosenWord.length).fill("_");
 let lives = 7;
 
 function updateWordDisplay() {
     const wordDisplay = document.getElementById("wordDisplay");
-    wordDisplay.innerHTML = guessedWord.map(letter => `<span>${letter}</span>`).join("");
+    wordDisplay.innerHTML = guessedWord.map(letter => '<span>' + letter + '</span>').join("");
 }
 
 function updateLivesDisplay() {
     const livesDisplay = document.getElementById("lives");
-    livesDisplay.textContent = `Vieți rămase: ${lives}`;
+    livesDisplay.textContent = 'Remaining lives: ' + lives;
 }
 
 function createLetterButtons() {
@@ -31,7 +31,6 @@ function handleGuess(letter) {
             button.disabled = true;
         }
     });
-
     if (chosenWord.includes(letter)) {
         chosenWord.split("").forEach((char, index) => {
             if (char == letter) guessedWord[index] = char;
@@ -39,7 +38,6 @@ function handleGuess(letter) {
     } else {
         --lives;
     }
-
     updateWordDisplay();
     updateLivesDisplay();
     checkGameStatus();
@@ -47,12 +45,11 @@ function handleGuess(letter) {
 
 function checkGameStatus() {
     const resultMessage = document.getElementById("resultMessage");
-
     if (guessedWord.join("") == chosenWord) {
-        resultMessage.innerHTML = `<div class="alert alert-success">Felicitări! Ai câștigat!</div>`;
+        resultMessage.innerHTML = '<div class="alert alert-success">Congratulations! You won!</div>';
         disableAllButtons();
     } else if (lives === 0) {
-        resultMessage.innerHTML = `<div class="alert alert-danger">Ai pierdut!</div>`;
+        resultMessage.innerHTML = '<div class="alert alert-danger">You lost!</div>';
         disableAllButtons();
     }
 }
@@ -61,7 +58,6 @@ function disableAllButtons() {
     const buttons = document.querySelectorAll("button");
     buttons.forEach(button => button.disabled = true);
 }
-
     updateWordDisplay();
     updateLivesDisplay();
     createLetterButtons();
