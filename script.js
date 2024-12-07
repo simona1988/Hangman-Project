@@ -29,7 +29,8 @@ function createLetterButtons() {
         const button = document.createElement("button");
         button.className = "btn btn-secondary letter-btn";
         button.textContent = String.fromCharCode(i);
-        button.addEventListener("click", () => handleGuess(button.textContent.toLowerCase()));
+        button.addEventListener("click", () => 
+            handleGuess(button.textContent.toLowerCase()));
         lettersContainer.appendChild(button);
     }
 }
@@ -43,7 +44,9 @@ function handleGuess(letter) {
     });
     if (chosenWord.includes(letter)) {
         chosenWord.split("").forEach((char, index) => {
-            if (char == letter) guessedWord[index] = char;
+            if (char == letter) {
+                guessedWord[index] = char;
+            }
         });
     } else {
         --lives;
@@ -75,6 +78,7 @@ function disableAllButtons() {
     const buttons = document.querySelectorAll("button");
     buttons.forEach(button => button.disabled = true);
 }
-    updateWordDisplay();
-    updateLivesDisplay();
-    createLetterButtons();
+    
+updateWordDisplay();
+updateLivesDisplay();
+createLetterButtons();
